@@ -15,6 +15,7 @@
             background-color: #ffe6f2;
             font-family: Arial, sans-serif;
             color: #333;
+            position: relative;
         }
 
         /* Botón centrado */
@@ -31,6 +32,7 @@
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: absolute;
         }
 
         button:hover {
@@ -40,13 +42,39 @@
         /* Caja de texto oculta */
         .hidden-text {
             display: none;
-            margin-top: 20px;
             font-size: 24px;
+            position: absolute;
+            text-align: center;
+        }
+
+        /* Animación de desvanecimiento */
+        .fade-in {
+            animation: fadeIn 2s ease-out forwards;
+        }
+
+        /* Animación para hacer que el texto aparezca poco a poco */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Emoji de corazón rojo */
         .heart {
             color: red;
+        }
+
+        /* Estilo para el segundo mensaje */
+        #loveMessage2 {
+            display: none;
+            font-size: 24px;
+            color: #333;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -55,16 +83,63 @@
         <!-- Botón inicial -->
         <button id="loveButton">Haga click acá</button>
         
-        <!-- Caja de texto que se muestra después del click -->
+        <!-- Caja de texto que se muestra después del cuarto click -->
         <div id="loveMessage" class="hidden-text">
             La amo muchisisisimo <span class="heart">&#10084;&#65039;</span>
+        </div>
+        
+        <!-- Segundo mensaje que aparece lentamente -->
+        <div id="loveMessage2" class="hidden-text">
+            y jamás lo olvide
         </div>
     </div>
 
     <script>
-        // Mostrar el mensaje al hacer click en el botón
+        let clickCount = 0;
+
+        // Función para mover el botón aleatoriamente por la pantalla
+        function moveButton() {
+            const button = document.getElementById("loveButton");
+            const bodyWidth = document.body.clientWidth;
+            const bodyHeight = document.body.clientHeight;
+
+            const maxX = bodyWidth - button.offsetWidth;
+            const maxY = bodyHeight - button.offsetHeight;
+
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            button.style.left = `${randomX}px`;
+            button.style.top = `${randomY}px`;
+        }
+
+        // Mostrar el primer mensaje y centrarlo después del cuarto click
+        function showMessage() {
+            const message = document.getElementById("loveMessage");
+            message.style.display = "block";
+            message.style.left = "50%";
+            message.style.top = "50%";
+            message.style.transform = "translate(-50%, -50%)";
+        }
+
+        // Mostrar el segundo mensaje con un retraso
+        function showMessage2() {
+            const message2 = document.getElementById("loveMessage2");
+            message2.style.display = "block";
+            message2.classList.add("fade-in");
+        }
+
+        // Manejar los clics en el botón
         document.getElementById("loveButton").addEventListener("click", function() {
-            document.getElementById("loveMessage").style.display = "block";
+            clickCount++;
+
+            if (clickCount < 4) {
+                moveButton();
+            } else if (clickCount === 4) {
+                showMessage();
+                // Mostrar el segundo mensaje con un pequeño retraso
+                setTimeout(showMessage2, 1000); // Aparece 1 segundo después del primer mensaje
+            }
         });
     </script>
 </body>
