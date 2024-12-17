@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Amor</title>
+    <style>
+        /* Estilo general */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe6f2;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        /* Botón centrado */
+        .container {
+            text-align: center;
+        }
+
+        button {
+            background-color: #ff4d79;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff1a57;
+        }
+
+        /* Caja de texto oculta */
+        .hidden-text {
+            display: none;
+            margin-top: 20px;
+            font-size: 24px;
+        }
+
+        /* Emoji de corazón rojo */
+        .heart {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Botón inicial -->
+        <button id="loveButton">Haga click acá</button>
+        
+        <!-- Caja de texto que se muestra después del click -->
+        <div id="loveMessage" class="hidden-text">
+            La amo muchisisisimo <span class="heart">&#10084;&#65039;</span>
+        </div>
+    </div>
+
+    <script>
+        // Mostrar el mensaje al hacer click en el botón
+        document.getElementById("loveButton").addEventListener("click", function() {
+            document.getElementById("loveMessage").style.display = "block";
+        });
+    </script>
+</body>
+</html>
